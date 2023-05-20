@@ -12,12 +12,25 @@ function App() {
   const [myRecipes, setMyRecipes] = useState([]);
   const [wordSubmitted, setWordSubmitted] = useState('avocado');
 
-  useEffect(async () => {
+useEffect(()=> {
+  const functionRecipes = async () => {
 const response = await fetch (`https://api.edamam.com/search?r=http%3A%2F%2Fwww.edamam.com%2Fontologies%2Fedamam.owl%23recipe_0123456789abcdef0123456789abcdef&app_id=${MY_ID}&app_key=${MY_KEY}`);
 const data = await response.json();
 console.log(data);
 setMyRecipes(data);
-  },[wordSubmitted] )
+  }
+  functionRecipes()},[wordSubmitted] ) 
+
+/*   const functionResponse = async () => {
+    const response = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&q=${wordSubmitted}&app_id=${MY_ID}&app_key=${MY_KEY}`);
+    const data = await response.json();
+    console.log(data.hits);
+    setMyRecipes(data.hits);
+    }
+     
+      useEffect(()=> {
+      functionResponse()
+    }, [wordSubmitted] ) */
 
   const myRecipeSearch = (e) => {
     setMySearch(e.target.value)
@@ -38,14 +51,14 @@ setMyRecipes(data);
 <h1>Find a Recipe</h1>
       </div>
 
-      <div className="contaner">
+      <div className="container">
 <form onSubmit={finalSearch}>
-  <input className="search" placeholder="Search..." onChange={myRecipeSearch} value={mySearch}></input>
+  <input className="search" placeholder="Search..." onChange={myRecipeSearch} value={mySearch} ></input>
 </form>
       </div>
 
       <div className="container">
-<button><img src="https://cdn.icon-icons.com/icons2/2066/PNG/512/search_icon_125165.png" alt="Bild"/></button>
+<button><img src="https://cdn.icon-icons.com/icons2/2066/PNG/512/search_icon_125165.png" alt="Bild" className="icons"/></button>
       </div>
 
 <div>
